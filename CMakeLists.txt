@@ -1141,7 +1141,7 @@ if(USE_SYSTEM_FRIBIDI)
 endif()
 
 if(USE_SYSTEM_GD)
-  find_package(GD REQUIRED)
+  #find_package(GD REQUIRED)
 endif()
 
 if(USE_SYSTEM_GMP)
@@ -1771,19 +1771,19 @@ else()
 endif()
 
 if(USE_SYSTEM_GD)
-  get_filename_component(suffix ${GD_LIBRARY} EXT)
-  if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
-    add_library(MiKTeX::Imported::GD SHARED IMPORTED)
-  else()
-    add_library(MiKTeX::Imported::GD STATIC IMPORTED)
-  endif()
-  set_target_properties(MiKTeX::Imported::GD
-    PROPERTIES
-      IMPORTED_LOCATION "${GD_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${GD_INCLUDE_DIRS}"
-  )
+  #get_filename_component(suffix ${GD_LIBRARY} EXT)
+  #if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
+  #  add_library(MiKTeX::Imported::GD SHARED IMPORTED)
+  #else()
+  #  add_library(MiKTeX::Imported::GD STATIC IMPORTED)
+  #endif()
+  #set_target_properties(MiKTeX::Imported::GD
+  #  PROPERTIES
+  #    IMPORTED_LOCATION "${GD_LIBRARY}"
+  #    INTERFACE_INCLUDE_DIRECTORIES "${GD_INCLUDE_DIRS}"
+  #)
 else()
-  add_subdirectory(${MIKTEX_REL_GD_DIR})
+  #add_subdirectory(${MIKTEX_REL_GD_DIR})
 endif()
 
 if(USE_SYSTEM_GMP)
@@ -2086,7 +2086,7 @@ add_subdirectory(${MIKTEX_REL_DEVNAG_DIR})
 add_subdirectory(${MIKTEX_REL_DOC_DIR})
 add_subdirectory(${MIKTEX_REL_DVICOPY_DIR})
 add_subdirectory(${MIKTEX_REL_DVIPDFMX_DIR})
-add_subdirectory(${MIKTEX_REL_DVIPNG_DIR})
+#add_subdirectory(${MIKTEX_REL_DVIPNG_DIR})
 add_subdirectory(${MIKTEX_REL_DVIPS_DIR})
 add_subdirectory(${MIKTEX_REL_DVISVGM_DIR})
 add_subdirectory(${MIKTEX_REL_EGL_REGISTRY_DIR})
