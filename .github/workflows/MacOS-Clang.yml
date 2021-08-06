@@ -25,7 +25,9 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         modules: qtscript
-      
+    
+    - run: brew install boost
+          
     - name: '🟨 Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
       with:

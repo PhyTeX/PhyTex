@@ -25,7 +25,9 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         modules: qtscript
-      
+        
+    - run: choco install ninja
+    
     - name: '${{ matrix.icon }} Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
       with:

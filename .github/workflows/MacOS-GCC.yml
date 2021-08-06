@@ -33,6 +33,8 @@ jobs:
       with:
         modules: qtscript
         
+    - run: brew install boost
+
     - name: '${{ matrix.icon }} Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
       with:
