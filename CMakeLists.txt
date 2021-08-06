@@ -996,12 +996,12 @@ if(MIKTEX_NATIVE_WINDOWS)
 endif()
 
 set(required_programs
-  cat
-  diff
+  #cat
+  #diff
   msgfmt
-  msgmerge
+  #msgmerge
   sed
-  xgettext
+  #xgettext
   xsltproc
 )
 
