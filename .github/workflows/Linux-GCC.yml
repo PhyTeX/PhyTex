@@ -33,7 +33,7 @@ jobs:
         modules: qtscript
       
     - name: Install package
-      run: sudo apt-get install gettext xsltproc libboost-all-dev libapr1 libapr1-dev apr-util fribidi
+      run: sudo apt-get install gettext xsltproc libboost-all-dev libapr1-dev libfribidi-dev
       
     - name: '${{ matrix.icon }} Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
