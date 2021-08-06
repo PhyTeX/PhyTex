@@ -23,6 +23,8 @@ jobs:
         
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
+      with:
+        modules: qtscript
       
     - name: '${{ matrix.icon }} Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
