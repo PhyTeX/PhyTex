@@ -22,12 +22,21 @@
 
 cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
 
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(GetCMakeMM)
+cmmm(VERSION "2.0" REPOSITORY "flagarde/CMakeMM" PROVIDER "gitlab" VERBOSITY VERBOSE)
+
+cmmm_modules_list(REPOSITORY "flagarde/CMakeCM" PROVIDER "gitlab")
+
+
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_COLOR_MAKEFILE FALSE)
 #set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
+
 
 set(CMAKE_LINK_DEPENDS_NO_SHARED 1)
 
@@ -73,6 +82,7 @@ project(${MIKTEX_PRODUCT_TAG}
   VERSION ${miktex_project_version}
 )
 
+include(OpenSSL)
 ###############################################################################
 ## global C/C++ options
 
@@ -1041,15 +1051,15 @@ foreach(p ${required_programs})
 endforeach()
 
 if(WITH_MIKTEX_DOC)
-  if(MIKTEX_NATIVE_WINDOWS)
-    set(fop_name fop.cmd)
-  else()
-    set(fop_name fop)
-  endif()
-  find_program(FOP_EXECUTABLE NAMES ${fop_name})
-  if(NOT FOP_EXECUTABLE)
-    message(FATAL_ERROR "The program ${fop_name} could not be found.")
-  endif()
+  #if(MIKTEX_NATIVE_WINDOWS)
+  #  set(fop_name fop.cmd)
+  #else()
+  #  set(fop_name fop)
+  #endif()
+  #find_program(FOP_EXECUTABLE NAMES ${fop_name})
+  #if(NOT FOP_EXECUTABLE)
+  #  message(FATAL_ERROR "The program ${fop_name} could not be found.")
+  #endif()
 endif()
 
 find_package(BISON REQUIRED)
@@ -1157,7 +1167,7 @@ if(USE_SYSTEM_HARFBUZZ)
 endif()
 
 if(USE_SYSTEM_HARFBUZZ_ICU)
-  #find_package(HARFBUZZ_ICU REQUIRED)
+  find_package(HARFBUZZ_ICU REQUIRED)
 endif()
 
 if(USE_SYSTEM_HUNSPELL)
@@ -1193,7 +1203,7 @@ if(USE_SYSTEM_OPENGL)
 endif()
 
 if(USE_SYSTEM_OPENSSL_CRYPTO)
-  find_package(OpenSSL REQUIRED)
+  #find_package(OpenSSL REQUIRED)
 endif()
 
 if(USE_SYSTEM_PIXMAN)
@@ -1847,7 +1857,7 @@ if(USE_SYSTEM_HARFBUZZ_ICU)
       INTERFACE_INCLUDE_DIRECTORIES "${HARFBUZZ_ICU_INCLUDE_DIRS}"
   )
 else()
-  #add_subdirectory(${MIKTEX_REL_HARFBUZZ_DIR})
+  add_subdirectory(${MIKTEX_REL_HARFBUZZ_DIR})
 endif()
 
 if(USE_SYSTEM_HUNSPELL)
@@ -1956,21 +1966,21 @@ if(USE_SYSTEM_OPENGL)
 endif()
 
 if(USE_SYSTEM_OPENSSL_CRYPTO)
-  get_filename_component(suffix ${OPENSSL_CRYPTO_LIBRARY} EXT)
-  if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
-    add_library(MiKTeX::Imported::OPENSSL::CRYPTO SHARED IMPORTED)
-  else()
-    add_library(MiKTeX::Imported::OPENSSL::CRYPTO STATIC IMPORTED)
-  endif()
-  set_target_properties(MiKTeX::Imported::OPENSSL::CRYPTO
-    PROPERTIES
-      IMPORTED_LOCATION "${OPENSSL_CRYPTO_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${OPENSSL_INCLUDE_DIR}"
-  )
+  #get_filename_component(suffix ${OPENSSL_CRYPTO_LIBRARY} EXT)
+  #if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
+  #  add_library(MiKTeX::Imported::OPENSSL::CRYPTO SHARED IMPORTED)
+  #else()
+  #  add_library(MiKTeX::Imported::OPENSSL::CRYPTO STATIC IMPORTED)
+  #endif()
+  #set_target_properties(MiKTeX::Imported::OPENSSL::CRYPTO
+  #  PROPERTIES
+  #    IMPORTED_LOCATION "${OPENSSL_CRYPTO_LIBRARY}"
+  #    INTERFACE_INCLUDE_DIRECTORIES "${OPENSSL_INCLUDE_DIR}"
+  #)
 elseif(WITH_LIBRESSL_CRYPTO)
-  add_subdirectory(${MIKTEX_REL_LIBRESSL_DIR})
-  set(openssl_crypto_dll_name ${libressl_crypto_dll_name})
-  set(openssl_crypto_lib_name ${libressl_crypto_lib_name})
+  #add_subdirectory(${MIKTEX_REL_LIBRESSL_DIR})
+  #set(openssl_crypto_dll_name ${libressl_crypto_dll_name})
+  #set(openssl_crypto_lib_name ${libressl_crypto_lib_name})
 endif()
 
 if(USE_SYSTEM_POPPLER)
