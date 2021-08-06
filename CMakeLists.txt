@@ -1094,7 +1094,7 @@ if(USE_SYSTEM_APR)
 endif()
 
 if(USE_SYSTEM_APRUTIL)
-  find_package(APRUTIL REQUIRED)
+  #find_package(APRUTIL REQUIRED)
 endif()
 
 if(USE_SYSTEM_BOOST)
@@ -1550,19 +1550,19 @@ else()
 endif()
 
 if(USE_SYSTEM_APRUTIL)
-  get_filename_component(suffix ${APRUTIL_LIBRARY} EXT)
-  if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
-    add_library(MiKTeX::Imported::APRUTIL SHARED IMPORTED)
-  else()
-    add_library(MiKTeX::Imported::APRUTIL STATIC IMPORTED)
-  endif()
-  set_target_properties(MiKTeX::Imported::APRUTIL
-    PROPERTIES
-      IMPORTED_LOCATION "${APRUTIL_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${APRUTIL_INCLUDE_DIRS}"
-  )
+  #get_filename_component(suffix ${APRUTIL_LIBRARY} EXT)
+  #if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
+  #  add_library(MiKTeX::Imported::APRUTIL SHARED IMPORTED)
+  #else()
+  #  add_library(MiKTeX::Imported::APRUTIL STATIC IMPORTED)
+  #endif()
+  #set_target_properties(MiKTeX::Imported::APRUTIL
+  #  PROPERTIES
+  #    IMPORTED_LOCATION "${APRUTIL_LIBRARY}"
+  #    INTERFACE_INCLUDE_DIRECTORIES "${APRUTIL_INCLUDE_DIRS}"
+  #)
 else()
-  add_subdirectory(${MIKTEX_REL_APR_UTIL_DIR})
+  #add_subdirectory(${MIKTEX_REL_APR_UTIL_DIR})
 endif()
 
 if(USE_SYSTEM_BZIP2)
