@@ -26,7 +26,7 @@ jobs:
       with:
         modules: qtscript
     
-    - run: brew install boost fribidi graphite2 hunspell icu4c curl log4cxx
+    - run: brew install boost fribidi graphite2 hunspell icu4c curl log4cxx openssl@1.1
           
     - name: '🟨 Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
