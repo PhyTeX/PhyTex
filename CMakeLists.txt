@@ -1090,7 +1090,7 @@ if(WITH_UI_QT)
 endif()
 
 if(USE_SYSTEM_APR)
-  find_package(APR REQUIRED)
+  #find_package(APR REQUIRED)
 endif()
 
 if(USE_SYSTEM_APRUTIL)
@@ -1534,19 +1534,19 @@ else()
 endif()
 
 if(USE_SYSTEM_APR)
-  get_filename_component(suffix ${APR_LIBRARY} EXT)
-  if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
-    add_library(MiKTeX::Imported::APR SHARED IMPORTED)
-  else()
-    add_library(MiKTeX::Imported::APR STATIC IMPORTED)
-  endif()
-  set_target_properties(MiKTeX::Imported::APR
-    PROPERTIES
-      IMPORTED_LOCATION "${APR_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${APR_INCLUDE_DIRS}"
-  )
+  #get_filename_component(suffix ${APR_LIBRARY} EXT)
+  #if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
+  #  add_library(MiKTeX::Imported::APR SHARED IMPORTED)
+  #else()
+  #  add_library(MiKTeX::Imported::APR STATIC IMPORTED)
+  #endif()
+  #set_target_properties(MiKTeX::Imported::APR
+  #  PROPERTIES
+  #    IMPORTED_LOCATION "${APR_LIBRARY}"
+  #    INTERFACE_INCLUDE_DIRECTORIES "${APR_INCLUDE_DIRS}"
+  #)
 else()
-  add_subdirectory(${MIKTEX_REL_APR_DIR})
+  #add_subdirectory(${MIKTEX_REL_APR_DIR})
 endif()
 
 if(USE_SYSTEM_APRUTIL)
