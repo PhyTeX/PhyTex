@@ -26,7 +26,7 @@ jobs:
       with:
         modules: qtscript
         
-    - run: choco install ninja
+    - run: choco install boost
     
     - name: '${{ matrix.icon }} Setup CMake'
       uses: jwlawson/actions-setup-cmake@v1.9
