@@ -28,7 +28,7 @@ jobs:
         fetch-depth: 0
         
     - name: Install package
-      run: sudo apt-get install gettext xsltproc libboost-all-dev libfribidi-dev pandoc curl
+      run: sudo apt-get install gettext xsltproc libboost-all-dev libfribidi-dev pandoc curl libcurl4-gnutls-dev
       
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
