@@ -151,11 +151,11 @@ if(MIKTEX_FREEBSD)
   )
 endif()
 
-if(USE_SYSTEM_OPENSSL_CRYPTO)
-  target_link_libraries(${core_dll_name} PRIVATE MiKTeX::Imported::OPENSSL::CRYPTO)
-elseif(WITH_LIBRESSL_CRYPTO)
-  target_link_libraries(${core_dll_name} PRIVATE ${openssl_crypto_dll_name})
-endif()
+#if(USE_SYSTEM_OPENSSL_CRYPTO)
+  target_link_libraries(${core_dll_name} PRIVATE OpenSSL::Crypto)
+#elseif(WITH_LIBRESSL_CRYPTO)
+#  target_link_libraries(${core_dll_name} PRIVATE ${openssl_crypto_dll_name})
+#endif()
 
 delay_load(${core_dll_name}
   ${bzip2_dll_name}
