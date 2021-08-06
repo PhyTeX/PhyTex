@@ -29,7 +29,7 @@ cmmm(VERSION "2.0" REPOSITORY "flagarde/CMakeMM" PROVIDER "gitlab" VERBOSITY VER
 
 cmmm_modules_list(REPOSITORY "flagarde/CMakeCM" PROVIDER "gitlab")
 
-
+set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -82,7 +82,7 @@ project(${MIKTEX_PRODUCT_TAG}
   VERSION ${miktex_project_version}
 )
 
-include(OpenSSL)
+
 ###############################################################################
 ## global C/C++ options
 
@@ -94,6 +94,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 ###############################################################################
 ## system type
+
+include(OpenSSL)
+include(Fmt)
 
 if(WIN32 AND NOT UNIX)
   set(MIKTEX_NATIVE_WINDOWS TRUE)
@@ -255,12 +258,6 @@ if(MIKTEX_MACOS_BUNDLE)
 elseif(MIKTEX_UNIX_ALIKE)
   set(use_system_fontconfig_default TRUE)
 endif()
-
-option(
-  USE_SYSTEM_FMT
-  "Use the system fmt library."
-  FALSE
-)
 
 option(
   USE_SYSTEM_FONTCONFIG
@@ -1134,10 +1131,6 @@ if(USE_SYSTEM_EXPAT)
   find_package(EXPAT REQUIRED)
 endif()
 
-if(USE_SYSTEM_FMT)
-  find_package(FMT REQUIRED)
-endif()
-
 if(USE_SYSTEM_FONTCONFIG)
   find_package(FONTCONFIG REQUIRED)
 endif()
@@ -1696,22 +1689,6 @@ if(USE_SYSTEM_EXPAT)
   )
 else()
   add_subdirectory(${MIKTEX_REL_EXPAT_DIR})
-endif()
-
-if(USE_SYSTEM_FMT)
-  get_filename_component(suffix ${FMT_LIBRARY} EXT)
-  if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
-    add_library(MiKTeX::Imported::FMT SHARED IMPORTED)
-  else()
-    add_library(MiKTeX::Imported::FMT STATIC IMPORTED)
-  endif()
-  set_target_properties(MiKTeX::Imported::FMT
-    PROPERTIES
-      IMPORTED_LOCATION "${FMT_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${FMT_INCLUDE_DIRS}"
-  )
-else()
-  add_subdirectory(${MIKTEX_REL_FMT_DIR})
 endif()
 
 if(USE_SYSTEM_FONTCONFIG)

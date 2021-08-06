@@ -85,11 +85,8 @@ else()
   target_link_libraries(miktex ${log4cxx_dll_name})
 endif()
 
-if (USE_SYSTEM_FMT)
-  target_link_libraries(miktex MiKTeX::Imported::FMT)
-else()
-  target_link_libraries(miktex ${fmt_dll_name})
-endif()
+
+target_link_libraries(miktex fmt::fmt)
 
 target_link_libraries(miktex
   ${core_dll_name}

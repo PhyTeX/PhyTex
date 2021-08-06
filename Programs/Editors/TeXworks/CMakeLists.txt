@@ -262,11 +262,7 @@ set(libs
   Qt5::Xml
 )
 
-if (USE_SYSTEM_FMT)
-  list(APPEND libs MiKTeX::Imported::FMT)
-else()
-  list(APPEND libs ${fmt_dll_name})
-endif()
+list(APPEND libs fmt::fmt)
 
 if(MIKTEX_UNIX_ALIKE AND NOT MIKTEX_MACOS_BUNDLE)
   list(APPEND libs Qt5::DBus)

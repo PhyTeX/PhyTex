@@ -94,11 +94,7 @@ set_source_files_properties(
     GENERATED TRUE
 )
 
-if(USE_SYSTEM_FMT)
-  target_link_libraries(${mf_target_name} PRIVATE MiKTeX::Imported::FMT)
-else()
-  target_link_libraries(${mf_target_name} PRIVATE ${fmt_dll_name})
-endif()
+target_link_libraries(${mf_target_name} PRIVATE fmt::fmt)
 
 if(WITH_TRAPMF)
   include(trapmf.cmake)

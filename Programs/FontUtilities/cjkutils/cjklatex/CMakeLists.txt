@@ -58,11 +58,7 @@ target_link_libraries(cjklatex
   ${texmf_dll_name}
 )
 
-if (USE_SYSTEM_FMT)
-  target_link_libraries(cjklatex MiKTeX::Imported::FMT)
-else()
-  target_link_libraries(cjklatex ${fmt_dll_name})
-endif()
+target_link_libraries(cjklatex fmt::fmt)
 
 if(MIKTEX_NATIVE_WINDOWS)
   target_link_libraries(cjklatex
