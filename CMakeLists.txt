@@ -20,6 +20,8 @@
 ###############################################################################
 cmake_minimum_required(VERSION 3.16)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(GetCMakeMM)
@@ -27,7 +29,16 @@ cmmm(VERSION "2.0" REPOSITORY "flagarde/CMakeMM" PROVIDER "gitlab" VERBOSITY VER
 
 cmmm_modules_list(REPOSITORY "flagarde/CMakeCM" PROVIDER "gitlab")
 
-set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+include(Zlib-ng)
+ set_target_properties(ZLIB
+    PROPERTIES
+      INTERFACE_COMPILE_DEFINITIONS "HAVE_LIBZ=1;HAVE_ZLIB=1;HAVE_ZLIB_H=1;HAVE_ZLIB_COMPRESS2=1"
+  )
+include(OpenSSL)
+include(Fmt)
+include(Nlohmann)
+
+
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -87,13 +98,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 ###############################################################################
 ## system type
-include(Zlib-ng)
- set_target_properties(ZLIB
-    PROPERTIES
-      INTERFACE_COMPILE_DEFINITIONS "HAVE_LIBZ=1;HAVE_ZLIB=1;HAVE_ZLIB_H=1;HAVE_ZLIB_COMPRESS2=1"
-  )
-include(OpenSSL)
-include(Fmt)
 
 if(WIN32 AND NOT UNIX)
   set(MIKTEX_NATIVE_WINDOWS TRUE)
@@ -1010,10 +1014,12 @@ if(WITH_MIKTEX_DOC)
 endif()
 
 if(WITH_UI_MFC)
+  if(WIN32)
   list(APPEND required_programs
     hhc
     makehm
   )
+  ENDIF()
 endif()
 
 if(MSVC)
@@ -2077,7 +2083,7 @@ add_subdirectory(${MIKTEX_REL_MPMLIB_DIR})
 add_subdirectory(${MIKTEX_REL_MPM_DIR})
 add_subdirectory(${MIKTEX_REL_MP_DIR})
 add_subdirectory(${MIKTEX_REL_MTHELP_DIR})
-add_subdirectory(${MIKTEX_REL_NLOHMANN_JSON_DIR})
+#add_subdirectory(${MIKTEX_REL_NLOHMANN_JSON_DIR})
 add_subdirectory(${MIKTEX_REL_OMEGAWARE_DIR})
 add_subdirectory(${MIKTEX_REL_OPENGL_REGISTRY_DIR})
 add_subdirectory(${MIKTEX_REL_OTPS_DIR})

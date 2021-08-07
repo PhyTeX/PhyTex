@@ -70,7 +70,7 @@ target_link_libraries(${mpm_dll_name}
     ${core_dll_name}
     ${extractor_dll_name}
     ${md5_dll_name}
-    ${nlohmann_json_dll_name}
+    nlohmann_json::nlohmann_json
 )
 
 if(USE_SYSTEM_EXPAT)
