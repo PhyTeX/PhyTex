@@ -164,11 +164,8 @@ if(MIKTEX_NATIVE_WINDOWS)
   )
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${zzip_dll_name} PRIVATE MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${zzip_dll_name} PRIVATE ${zlib_dll_name})
-endif()
+
+target_link_libraries(${zzip_dll_name} PRIVATE ZLIB::ZLIB)
 
 install(TARGETS ${zzip_dll_name}
   RUNTIME DESTINATION "${MIKTEX_BINARY_DESTINATION_DIR}"

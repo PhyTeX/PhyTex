@@ -41,11 +41,7 @@ target_compile_definitions(luatex-luamisc-objects
     -DLUAZIP_API=
 )
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(luatex-luamisc-objects PUBLIC MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(luatex-luamisc-objects PUBLIC ${zlib_dll_name})
-endif()
+target_link_libraries(luatex-luamisc-objects PUBLIC ZLIB::ZLIB)
 
 if(USE_SYSTEM_ZZIP)
   target_link_libraries(luatex-luamisc-objects PUBLIC MiKTeX::Imported::ZZIP)

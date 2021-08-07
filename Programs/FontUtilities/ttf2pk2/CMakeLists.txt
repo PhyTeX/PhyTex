@@ -84,11 +84,7 @@ else()
   target_link_libraries(${MIKTEX_PREFIX}ttf2pk ${freetype2_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${MIKTEX_PREFIX}ttf2pk MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${MIKTEX_PREFIX}ttf2pk ${zlib_dll_name})
-endif()
+target_link_libraries(${MIKTEX_PREFIX}ttf2pk ZLIB::ZLIB)
 
 target_link_libraries(${MIKTEX_PREFIX}ttf2pk
   ${app_dll_name}
@@ -137,11 +133,7 @@ else()
   target_link_libraries(${MIKTEX_PREFIX}ttf2tfm ${freetype2_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${MIKTEX_PREFIX}ttf2tfm MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${MIKTEX_PREFIX}ttf2tfm ${zlib_dll_name})
-endif()
+target_link_libraries(${MIKTEX_PREFIX}ttf2tfm ZLIB::ZLIB)
 
 target_link_libraries(${MIKTEX_PREFIX}ttf2tfm
   ${app_dll_name}

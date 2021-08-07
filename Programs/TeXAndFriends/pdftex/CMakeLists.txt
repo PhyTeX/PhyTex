@@ -86,11 +86,9 @@ if(USE_SYSTEM_JPEG)
 else()
   target_link_libraries(${MIKTEX_PREFIX}pdftosrc ${jpeg_dll_name})
 endif()
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${MIKTEX_PREFIX}pdftosrc MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${MIKTEX_PREFIX}pdftosrc ${zlib_dll_name})
-endif()
+
+target_link_libraries(${MIKTEX_PREFIX}pdftosrc ZLIB::ZLIB)
+
 target_link_libraries(${MIKTEX_PREFIX}pdftosrc
   ${app_dll_name}
   ${core_dll_name}
@@ -465,11 +463,7 @@ else()
 endif()
 
 if(NOT LINK_EVERYTHING_STATICALLY)
-  if(USE_SYSTEM_ZLIB)
-    target_link_libraries(${pdftex_target_name} PRIVATE MiKTeX::Imported::ZLIB)
-  else()
-    target_link_libraries(${pdftex_target_name} PRIVATE ${zlib_dll_name})
-  endif()
+  target_link_libraries(${pdftex_target_name} PRIVATE ZLIB::ZLIB)
   if(MIKTEX_NATIVE_WINDOWS)
     target_link_libraries(${pdftex_target_name}
       PRIVATE

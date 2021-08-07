@@ -144,11 +144,7 @@ else()
   target_link_libraries(${metapost_backends_lib_name} PRIVATE ${png_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${metapost_backends_lib_name} PRIVATE MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${metapost_backends_lib_name} PRIVATE ${zlib_dll_name})
-endif()
+target_link_libraries(${metapost_backends_lib_name} PRIVATE ZLIB::ZLIB)
 
 install(TARGETS ${metapost_backends_lib_name}
   RUNTIME DESTINATION "${MIKTEX_BINARY_DESTINATION_DIR}"
@@ -326,12 +322,8 @@ else()
   target_link_libraries(${metapost_core_lib_name} PRIVATE ${png_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${metapost_core_lib_name} PRIVATE MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${metapost_core_lib_name} PRIVATE ${zlib_dll_name})
-endif()
-
+target_link_libraries(${metapost_core_lib_name} PRIVATE ZLIB::ZLIB)
+  
 install(TARGETS ${metapost_core_lib_name}
   RUNTIME DESTINATION "${MIKTEX_BINARY_DESTINATION_DIR}"
   LIBRARY DESTINATION "${MIKTEX_LIBRARY_DESTINATION_DIR}"
@@ -511,11 +503,7 @@ else()
   target_link_libraries(${metapost_dll_name} PRIVATE ${mpfr_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${metapost_dll_name} PRIVATE MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${metapost_dll_name} PRIVATE ${zlib_dll_name})
-endif()
+target_link_libraries(${metapost_dll_name} PRIVATE ZLIB::ZLIB)
 
 target_link_libraries(${metapost_dll_name}
   PRIVATE

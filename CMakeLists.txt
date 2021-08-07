@@ -18,9 +18,7 @@
 ## USA.
 
 ###############################################################################
-## CMake controls
-
-cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -32,11 +30,6 @@ cmmm_modules_list(REPOSITORY "flagarde/CMakeCM" PROVIDER "gitlab")
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-set(CMAKE_COLOR_MAKEFILE FALSE)
-#set(CMAKE_VERBOSE_MAKEFILE TRUE)
-
-
 
 set(CMAKE_LINK_DEPENDS_NO_SHARED 1)
 
@@ -94,7 +87,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 ###############################################################################
 ## system type
-
+include(Zlib-ng)
+ set_target_properties(ZLIB
+    PROPERTIES
+      INTERFACE_COMPILE_DEFINITIONS "HAVE_LIBZ=1;HAVE_ZLIB=1;HAVE_ZLIB_H=1;HAVE_ZLIB_COMPRESS2=1"
+  )
 include(OpenSSL)
 include(Fmt)
 
@@ -416,12 +413,6 @@ option(
 )
 
 option(
-  USE_SYSTEM_ZLIB
-  "Use the system zlib compression library."
-  ${MIKTEX_UNIX_ALIKE}
-)
-
-option(
   USE_SYSTEM_ZZIP
   "Use the system Zzip compression library."
   ${MIKTEX_UNIX_ALIKE}
@@ -478,7 +469,7 @@ option(
 option(
   WITH_UI_MFC
   "Build MFC components."
-  ${MSVC}
+  TRUE
 )
 
 option(
@@ -568,31 +559,31 @@ option(
 option(
   WITH_MKTEXLSR
   ""
-  ${WIN32}
+  TRUE
 )
 
 option(
   WITH_TEXHASH
   ""
-  ${WIN32}
+  TRUE
 )
 
 option(
   WITH_TEXLINKS
   ""
-  ${WIN32}
+  TRUE
 )
 
 option(
   WITH_TEXDOC
   ""
-  ${WIN32}
+  TRUE
 )
 
 option(
   WITH_UPDMAP
   ""
-  ${WIN32}
+  TRUE
 )
 
 if(WITH_ASYMPTOTE AND MIKTEX_NATIVE_WINDOWS)
@@ -1223,10 +1214,6 @@ if(USE_SYSTEM_URIPARSER)
   find_package(URIPARSER REQUIRED)
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  find_package(ZLIB REQUIRED)
-endif()
-
 if(USE_SYSTEM_ZZIP)
   find_package(ZZIP REQUIRED)
 endif()
@@ -1519,22 +1506,6 @@ configure_file(
 ##
 ## base libraries (on which other libraries depend on) must be defined early
 
-if(USE_SYSTEM_ZLIB)
-  get_filename_component(suffix ${ZLIB_LIBRARY} EXT)
-  if (suffix STREQUAL CMAKE_SHARED_LIBRARY_SUFFIX)
-    add_library(MiKTeX::Imported::ZLIB SHARED IMPORTED)
-  else()
-    add_library(MiKTeX::Imported::ZLIB STATIC IMPORTED)
-  endif()
-  set_target_properties(MiKTeX::Imported::ZLIB
-    PROPERTIES
-      IMPORTED_LOCATION "${ZLIB_LIBRARY}"
-      INTERFACE_COMPILE_DEFINITIONS "HAVE_LIBZ=1;HAVE_ZLIB=1;HAVE_ZLIB_H=1;HAVE_ZLIB_COMPRESS2=1"
-      INTERFACE_INCLUDE_DIRECTORIES "${ZLIB_INCLUDE_DIRS}"
-  )
-else()
-  add_subdirectory(${MIKTEX_REL_ZLIB_DIR})
-endif()
 
 if(USE_SYSTEM_APR)
   #get_filename_component(suffix ${APR_LIBRARY} EXT)
@@ -1635,7 +1606,7 @@ if(USE_SYSTEM_PNG)
       IMPORTED_LOCATION "${PNG_LIBRARY}"
       INTERFACE_COMPILE_DEFINITIONS HAVE_LIBPNG=1
       INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
-      INTERFACE_LINK_LIBRARIES MiKTeX::Imported::ZLIB
+      INTERFACE_LINK_LIBRARIES ZLIB::ZLIB
   )
 else()
   add_subdirectory(${MIKTEX_REL_PNG_DIR})
@@ -1653,7 +1624,7 @@ if(USE_SYSTEM_CAIRO)
       IMPORTED_LOCATION "${CAIRO_LIBRARY}"
       INTERFACE_INCLUDE_DIRECTORIES "${CAIRO_INCLUDE_DIRS}"
       INTERFACE_LINK_LIBRARIES
-        "MiKTeX::Imported::FREETYPE2;MiKTeX::Imported::PIXMAN;MiKTeX::Imported::PNG;MiKTeX::Imported::ZLIB;Threads::Threads"
+        "MiKTeX::Imported::FREETYPE2;MiKTeX::Imported::PIXMAN;MiKTeX::Imported::PNG;ZLIB::ZLIB;Threads::Threads"
   )
 else()
   add_subdirectory(${MIKTEX_REL_CAIRO_DIR})

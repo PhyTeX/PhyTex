@@ -247,11 +247,7 @@ else()
   target_link_libraries(${MIKTEX_PREFIX}dvipdfmx ${png_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${MIKTEX_PREFIX}dvipdfmx MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${MIKTEX_PREFIX}dvipdfmx ${zlib_dll_name})
-endif()
+target_link_libraries(${MIKTEX_PREFIX}dvipdfmx ZLIB::ZLIB)
 
 if(MIKTEX_NATIVE_WINDOWS)
   target_link_libraries(${MIKTEX_PREFIX}dvipdfmx

@@ -73,11 +73,7 @@ endif()
 
 target_link_libraries(${texmf_dll_name} PRIVATE fmt::fmt)
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${texmf_dll_name} PRIVATE MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${texmf_dll_name} PRIVATE ${zlib_dll_name})
-endif()
+target_link_libraries(${texmf_dll_name} PRIVATE ZLIB::ZLIB)
 
 target_link_libraries(${texmf_dll_name}
   PUBLIC

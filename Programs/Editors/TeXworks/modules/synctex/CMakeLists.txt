@@ -32,11 +32,7 @@ add_library(synctex-static STATIC
   ${synctex_sources}
 )
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(synctex-static PUBLIC MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(synctex-static PUBLIC ${zlib_dll_name})
-endif()
+target_link_libraries(synctex-static PUBLIC ZLIB::ZLIB)
 
 if(MIKTEX_NATIVE_WINDOWS)
   target_link_libraries(synctex-static PUBLIC ${utf8wrap_dll_name})

@@ -556,11 +556,7 @@ else()
   target_link_libraries(${MIKTEX_PREFIX}dvisvgm ${freetype2_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${MIKTEX_PREFIX}dvisvgm MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${MIKTEX_PREFIX}dvisvgm ${zlib_dll_name})
-endif()
+target_link_libraries(${MIKTEX_PREFIX}dvisvgm ZLIB::ZLIB)
 
 target_link_libraries(${MIKTEX_PREFIX}dvisvgm
   ${app_dll_name}

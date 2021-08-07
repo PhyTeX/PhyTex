@@ -43,8 +43,5 @@ target_link_libraries(luatex-luaffi-objects
     ${CMAKE_DL_LIBS}
     ${lua53_target_name}
 )
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(luatex-luaffi-objects PUBLIC MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(luatex-luaffi-objects PUBLIC ${zlib_dll_name})
-endif()
+
+target_link_libraries(luatex-luaffi-objects PUBLIC ZLIB::ZLIB)

@@ -69,11 +69,7 @@ else()
   target_link_libraries(${core_lib_name} PUBLIC ${uriparser_lib_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${core_lib_name} PUBLIC MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${core_lib_name} PUBLIC ${zlib_lib_name})
-endif()
+target_link_libraries(${core_lib_name} PUBLIC ZLIB::ZLIB)
 
 target_link_libraries(${core_lib_name}
   PUBLIC

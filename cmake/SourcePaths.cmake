@@ -161,7 +161,6 @@ set(MIKTEX_REL_XINDY_DIR                "Programs/Indexing/xindy")
 set(MIKTEX_REL_XML2PMX_DIR              "Programs/Converters/xml2pmx")
 set(MIKTEX_REL_XPDF_DIR                 "Libraries/3rd/xpdf")
 set(MIKTEX_REL_YAP_MFC_DIR              "Programs/MiKTeX/Yap/MFC")
-set(MIKTEX_REL_ZLIB_DIR                 "Libraries/3rd/zlib")
 set(MIKTEX_REL_ZZIP_DIR                 "Libraries/3rd/zzip")
 
 set(MIKTEX_REL_CSS_DIR                  "${MIKTEX_REL_DOC_DIR}/Styles")

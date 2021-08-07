@@ -272,11 +272,7 @@ else()
   target_link_libraries(luatex-common-engine-objects PUBLIC ${png_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(luatex-common-engine-objects PUBLIC MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(luatex-common-engine-objects PUBLIC ${zlib_dll_name})
-endif()
+target_link_libraries(luatex-common-engine-objects PUBLIC ZLIB::ZLIB)
 
 target_link_libraries(luatex-common-engine-objects
   PUBLIC

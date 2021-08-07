@@ -205,17 +205,9 @@ if(ENABLE_LIBJPEG)
   )
 endif()
 
-if(ENABLE_ZLIB)
-  list(APPEND poppler_sources
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/poppler/FlateStream.cc
-  )
-endif()
+list(APPEND poppler_sources ${CMAKE_CURRENT_SOURCE_DIR}/source/poppler/FlateStream.cc)
 
-if(ENABLE_ZLIB_UNCOMPRESS)
-  list(APPEND poppler_sources
-    ${CMAKE_CURRENT_SOURCE_DIR}/source/poppler/FlateEncoder.cc
-  )
-endif()
+list(APPEND poppler_sources ${CMAKE_CURRENT_SOURCE_DIR}/source/poppler/FlateEncoder.cc)
 
 if(ENABLE_NSS3)
   list(APPEND poppler_sources

@@ -162,11 +162,7 @@ else()
   target_link_libraries(${gd_dll_name} PRIVATE ${png_dll_name})
 endif()
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${gd_dll_name} PRIVATE MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${gd_dll_name} PRIVATE ${zlib_dll_name})
-endif()
+target_link_libraries(${gd_dll_name} PRIVATE ZLIB::ZLIB)
 
 if(MIKTEX_NATIVE_WINDOWS)
   target_link_libraries(${gd_dll_name}

@@ -75,11 +75,7 @@ target_link_libraries(${MIKTEX_PREFIX}synctex
   ${w2cemu_dll_name}
 )
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${MIKTEX_PREFIX}synctex MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${MIKTEX_PREFIX}synctex ${zlib_dll_name})
-endif()
+target_link_libraries(${MIKTEX_PREFIX}synctex ZLIB::ZLIB)
 
 if(MIKTEX_NATIVE_WINDOWS)
   target_link_libraries(${MIKTEX_PREFIX}synctex

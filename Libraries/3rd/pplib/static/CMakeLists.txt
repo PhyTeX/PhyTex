@@ -26,11 +26,7 @@ target_include_directories(${pplib_lib_name}
     ${public_include_directories}
 )
 
-if(USE_SYSTEM_ZLIB)
-  target_link_libraries(${pplib_lib_name} PUBLIC MiKTeX::Imported::ZLIB)
-else()
-  target_link_libraries(${pplib_lib_name} PUBLIC ${zlib_dll_name})
-endif()
+target_link_libraries(${pplib_lib_name} PUBLIC ZLIB::ZLIB)
 
 target_link_libraries(${pplib_lib_name}
   PUBLIC
