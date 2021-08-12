@@ -36,7 +36,7 @@ jobs:
     - run: brew install boost fribidi graphite2 hunspell icu4c curl log4cxx pixman popt
 
     - name: '${{ matrix.icon }} Setup CMake'
-      uses: jwlawson/actions-setup-cmake@v1.9
+      uses: jwlawson/actions-setup-cmake@v1.10
       with:
         cmake-version: '${{env.CMAKE_VERSION}}'
         github-api-token: ${{ secrets.GITHUB_TOKEN }}
